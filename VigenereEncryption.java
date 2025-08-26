@@ -47,11 +47,32 @@ class VigenereEncryption {
 
 
 
-    public void   decrypt (String EncryptedMessage ,  String Key  ) {
+    public String   decrypt (String EncryptedMessage ,  String Key  ) {
 
+		Key  =  Key.toUpperCase() ;
+		
+		        StringBuilder decryptedMessage = new StringBuilder();
+
+		
+		for  (int  i = 0 ; i  <  EncryptedMessage.length() ;  i++ ) {
+			char   encryptedChar  =  EncryptedMessage.charAt(i) ;
+			char   keyChar  =  Key.charAt(i % Key.length()) ;
+			
+			
+			for (int j = 0 ; j < 26 ; j++) {
+				
+				if (vigenere[keyChar - 'A'][j] == encryptedChar ) {
+				
+				decryptedMessage.append(vigenere[0][j]) ;
+				break ; 
+				
+			
+			}
+			
+		} 
             
-
-
+		}
+				return decryptedMessage.toString() ;
 
     }
 
@@ -74,6 +95,16 @@ class VigenereEncryption {
         String SecretMessage = secret.encrypt(Message, Key);
 
         System.out.println("Encrypted Message : " + SecretMessage);
+		
+		
+		
+		        String Secret = "NQKVQEKVQSQE";
+
+		
+		String DecryptedMessage = secret.decrypt(Secret, Key);
+
+        System.out.println("Decrypted Message : " + DecryptedMessage);
+		
 
     }
 
